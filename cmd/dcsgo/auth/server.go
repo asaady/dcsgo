@@ -15,7 +15,6 @@ import (
 	"github.com/jackc/pgx/v4"
 	pg "github.com/vgarvardt/go-oauth2-pg"
 	"github.com/vgarvardt/go-pg-adapter/pgx4adapter"
-	"gopkg.in/oauth2.v3/manage"
 )
 
 func main() {
@@ -39,7 +38,7 @@ func main() {
 	manager.MapTokenStorage(tokenStore)
 	manager.MapClientStorage(clientStore)
 	// ...
-}
+
 
 	// token memory store
 //	manager.MustTokenStorage(store.NewMemoryTokenStore())
