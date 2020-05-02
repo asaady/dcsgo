@@ -30,9 +30,9 @@ env:
 
 before_install:
   - sudo pg_dropcluster --stop 12 main
-  - sudo pg_upgradecluster 11 main
+  - sudo pg_upgradecluster 10 main
   - sudo pg_ctlcluster 12 main restart
-  - sudo pg_dropcluster 11 main
+  - sudo pg_dropcluster 10 main
 
 before_script:    
   - psql -c 'create database oauth2_test;' -U postgres
