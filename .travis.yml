@@ -18,12 +18,23 @@ services:
 
 addons:
   postgresql: "12"
+  apt:
+    packages:
+    - postgresql-12
+    - postgresql-client-12
+    - postgresql-server-dev-12
 
 env:
   global:
     - DB_URI=postgres://postgres@localhost:5432/oauth2_test?sslmode=disable
 
 before_install:
+  - sudo pg_dropcluster --stop 12 main
+  - sudo pg_upgradecluster 11 main
+  - sudo pg_ctlcluster 12 main restart
+  - sudo pg_dropcluster 11 main
+
+before_script:    
   - psql -c 'create database oauth2_test;' -U postgres
   - env GO111MODULE=on go mod vendor
 
