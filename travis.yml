@@ -1,0 +1,26 @@
+language: go
+sudo: false
+
+go:
+  - "1.14"
+  - "stable"
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "12"
+
+env:
+  global:
+    - PG_URI=postgres://postgres@localhost:5432/oauth2_test?sslmode=disable
+
+before_install:
+  - psql -c 'create database oauth2_test;' -U postgres
+  - env GO111MODULE=on go mod vendor
+
+script:
+  - go test -coverprofile=coverage.txt -covermode=atomic ./...
+
+after_success:
+  - bash <(curl -s http://localhost/bash)
