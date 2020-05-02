@@ -1,6 +1,14 @@
 language: go
 sudo: false
 
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 4581ac38a9150ff449bc0eb23a22ec31448a07e3
+  keep_history: true
+  on:
+    branch: master
+
 go:
   - "1.14"
   - "stable"
